@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Granatina – El Placer de Cuidarte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:    #E8520A;
+      --orange-dk: #C0420A;
+      --yellow:    #F5C842;
+      --green:     #2D8B4E;
+      --green-lt:  #4CAF72;
+      --red:       #D63C2F;
+      --cream:     #FFF8EE;
+      --brown:     #7A3B1E;
+      --white:     #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: #3a2010;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(232,82,10,0.96);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 5%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    nav .logo-nav {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--white); font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem; font-weight: 700; text-decoration: none;
+    }
+    nav .logo-nav img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    nav ul { list-style: none; display: flex; gap: 22px; }
+    nav ul li a {
+      color: var(--white); text-decoration: none; font-weight: 700;
+      font-size: .9rem; letter-spacing: .04em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul li a:hover { color: var(--yellow); }
+    .nav-cta {
+      background: var(--yellow); color: var(--brown) !important;
+      padding: 7px 18px; border-radius: 30px;
+    }
+    .nav-cta:hover { background: var(--white) !important; color: var(--orange) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 60% 40%, #f97316 0%, var(--orange) 45%, var(--orange-dk) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 100px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-fruits {
+      position: absolute; inset: 0; pointer-events: none;
+      font-size: 2.8rem; line-height: 1;
+    }
+    .hero-fruits span {
+      position: absolute;
+      animation: floatFruit 6s ease-in-out infinite;
+      opacity: .55;
+    }
+    @keyframes floatFruit {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-18px) rotate(8deg); }
+    }
+    .hero-badge {
+      background: var(--yellow); color: var(--brown);
+      font-weight: 800; font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase; padding: 6px 18px; border-radius: 30px;
+      margin-bottom: 18px; display: inline-block;
+    }
+    #hero h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      color: var(--white);
+      line-height: 1.05;
+      text-shadow: 0 3px 18px rgba(0,0,0,.25);
+      margin-bottom: 8px;
+    }
+    #hero .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(255,255,255,.9);
+      font-weight: 600; margin-bottom: 14px;
+      letter-spacing: .03em;
+    }
+    #hero .origin {
+      font-size: .95rem; color: rgba(255,255,255,.75);
+      margin-bottom: 36px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--green); color: var(--white);
+      padding: 14px 32px; border-radius: 50px; text-decoration: none;
+      font-weight: 800; font-size: 1.05rem; letter-spacing: .02em;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-wa {
+      background: #25D366; color: var(--white);
+      padding: 14px 32px; border-radius: 50px; text-decoration: none;
+      font-weight: 800; font-size: 1.05rem;
+      display: flex; align-items: center; gap: 9px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-wa svg { width: 22px; height: 22px; fill: white; }
+    .hero-fruits-row {
+      margin-top: 40px;
+      font-size: 2rem; letter-spacing: .5rem;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:.65} }
+
+    /* Wave divider */
+    .wave { display: block; width: 100%; overflow: hidden; line-height: 0; }
+    .wave svg { display: block; width: 100%; }
+
+    /* ── FRUIT CARDS BIG ── */
+    .fruits-showcase { display: flex; flex-wrap: wrap; }
+    .fruit-card-big {
+      background: var(--white); border-radius: 24px; padding: 30px 22px;
+      width: 200px; text-align: center;
+      box-shadow: 0 6px 24px rgba(232,82,10,.12);
+      transition: transform .2s;
+    }
+    .fruit-card-big:hover { transform: translateY(-6px); }
+    .fruit-card-big .fb-emoji { font-size: 3.2rem; margin-bottom: 12px; }
+    .fruit-card-big h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--brown); margin-bottom: 8px; }
+    .fruit-card-big p { font-size: .83rem; color: #7a5a44; line-height: 1.55; }
+
+    /* ── WHAT IS ── */
+    #que-es {
+      background: var(--cream);
+      padding: 80px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .section-eyebrow {
+      text-transform: uppercase; font-size: .78rem; letter-spacing: .14em;
+      font-weight: 800; color: var(--orange); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.2; margin-bottom: 18px; color: var(--brown);
+    }
+    .section-body {
+      font-size: 1.05rem; line-height: 1.75;
+      color: #5a3520;
+    }
+    .icon-card-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .icon-card {
+      background: var(--white);
+      border-radius: 18px; padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(232,82,10,.1);
+      transition: transform .2s;
+    }
+    .icon-card:hover { transform: translateY(-4px); }
+    .icon-card .ic-emoji { font-size: 2.2rem; margin-bottom: 8px; }
+    .icon-card h4 { font-size: .9rem; font-weight: 800; color: var(--brown); }
+    .icon-card p { font-size: .8rem; color: #7a5a44; margin-top: 4px; }
+
+    /* full-width wrapper for sections with bg */
+    .full-bg { width: 100%; }
+
+    /* ── PROCESS ── */
+    #proceso {
+      background: linear-gradient(135deg, var(--green) 0%, #1d6636 100%);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    #proceso .section-eyebrow { color: var(--yellow); }
+    #proceso .section-title { color: var(--white); }
+    #proceso .section-body { color: rgba(255,255,255,.82); max-width: 620px; margin: 0 auto 50px; }
+    .steps {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .step {
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.22);
+      border-radius: 20px; padding: 28px 22px;
+      width: 180px; text-align: center;
+      backdrop-filter: blur(4px);
+      transition: transform .2s, background .2s;
+    }
+    .step:hover { transform: translateY(-6px); background: rgba(255,255,255,.2); }
+    .step .step-emoji { font-size: 2.4rem; margin-bottom: 10px; }
+    .step h4 { color: var(--yellow); font-size: .95rem; font-weight: 800; margin-bottom: 6px; }
+    .step p { color: rgba(255,255,255,.8); font-size: .8rem; line-height: 1.5; }
+    .step-arrow { color: rgba(255,255,255,.4); font-size: 1.6rem; align-self: center; }
+
+    /* ── BENEFITS ── */
+    #beneficios {
+      padding: 80px 5%;
+      background: var(--cream);
+      max-width: 1100px; margin: 0 auto;
+      text-align: center;
+    }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 22px; margin-top: 44px;
+    }
+    .benefit-card {
+      background: var(--white); border-radius: 24px; padding: 32px 22px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      transition: transform .2s;
+    }
+    .benefit-card:hover { transform: translateY(-5px); }
+    .benefit-card .b-emoji { font-size: 2.6rem; margin-bottom: 14px; }
+    .benefit-card h3 { font-size: 1rem; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
+    .benefit-card p { font-size: .87rem; color: #7a5a44; line-height: 1.6; }
+    .benefit-card.highlight { background: var(--orange); }
+    .benefit-card.highlight h3, .benefit-card.highlight p { color: var(--white); }
+
+    /* ── PRODUCTS ── */
+    #productos {
+      background: linear-gradient(160deg, #FFF3E0 0%, #FFE0B2 100%);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    #productos .section-title { color: var(--brown); }
+    .products-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 28px;
+      margin-top: 50px; max-width: 900px; margin-left: auto; margin-right: auto;
+    }
+    .product-card {
+      background: var(--white); border-radius: 28px; padding: 36px 28px 30px;
+      width: 240px; text-align: center;
+      box-shadow: 0 8px 32px rgba(232,82,10,.13);
+      position: relative; transition: transform .25s;
+    }
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card.featured {
+      background: var(--orange);
+      color: var(--white);
+      transform: scale(1.06);
+      box-shadow: 0 12px 40px rgba(232,82,10,.4);
+    }
+    .product-card.featured:hover { transform: scale(1.06) translateY(-6px); }
+    .product-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--yellow); color: var(--brown);
+      font-size: .7rem; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
+    }
+    .product-card .p-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .product-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; margin-bottom: 4px;
+    }
+    .product-card .p-sub { font-size: .85rem; opacity: .7; margin-bottom: 14px; }
+    .product-card .p-price {
+      font-size: 2rem; font-weight: 900;
+      color: var(--green);
+    }
+    .product-card.featured .p-price { color: var(--yellow); }
+    .product-card .p-desc { font-size: .82rem; opacity: .75; margin-top: 10px; line-height: 1.5; }
+
+    /* ── FRUITS ── */
+    #frutas {
+      background: var(--cream); padding: 80px 5%;
+      max-width: 1100px; margin: 0 auto; text-align: center;
+    }
+    .fruits-showcase {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 16px; margin-top: 44px;
+    }
+    .fruit-pill {
+      background: var(--white); border-radius: 50px;
+      padding: 14px 24px; display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 3px 14px rgba(0,0,0,.07);
+      font-weight: 700; font-size: 1rem; color: var(--brown);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .fruit-pill:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+    .fruit-pill span:first-child { font-size: 1.6rem; }
+
+    /* ── CTA ── */
+    #pedir {
+      background: linear-gradient(135deg, #25D366 0%, #128C4E 100%);
+      padding: 90px 5%; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #pedir::before {
+      content: '🌿'; font-size: 8rem; position: absolute;
+      top: -20px; left: -20px; opacity: .08; line-height: 1;
+    }
+    #pedir::after {
+      content: '🍊'; font-size: 8rem; position: absolute;
+      bottom: -20px; right: -20px; opacity: .08; line-height: 1;
+    }
+    #pedir h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--white); margin-bottom: 16px;
+    }
+    #pedir p { color: rgba(255,255,255,.88); font-size: 1.1rem; max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+    .btn-wa-big {
+      background: var(--white); color: #128C4E;
+      padding: 18px 44px; border-radius: 50px; text-decoration: none;
+      font-weight: 900; font-size: 1.15rem;
+      display: inline-flex; align-items: center; gap: 12px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 6px 30px rgba(0,0,0,.22);
+    }
+    .btn-wa-big:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.28); }
+    .btn-wa-big svg { width: 26px; height: 26px; fill: #25D366; }
+    .wa-note { color: rgba(255,255,255,.65); font-size: .85rem; margin-top: 18px; }
+
+    /* ── ABOUT ── */
+    #nosotros {
+      background: var(--cream); padding: 80px 5%;
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    #nosotros .section-body { max-width: 660px; margin: 0 auto; font-size: 1.07rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 28px; }
+    .tag {
+      background: var(--orange); color: var(--white);
+      padding: 7px 18px; border-radius: 30px; font-size: .85rem; font-weight: 700;
+    }
+    .tag.g { background: var(--green); }
+    .tag.y { background: var(--yellow); color: var(--brown); }
+    .tag.r { background: var(--red); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown); color: rgba(255,255,255,.7);
+      padding: 40px 5%; text-align: center;
+      font-size: .88rem; line-height: 1.8;
+    }
+    footer .logo-foot {
+      font-family: 'Dancing Script', cursive; font-size: 2rem;
+      color: var(--yellow); display: block; margin-bottom: 8px;
+    }
+    footer a { color: #25D366; text-decoration: none; }
+
+    /* ── FLOATING WA BTN ── */
+    .wa-float {
+      position: fixed; bottom: 26px; right: 26px; z-index: 200;
+      background: #25D366; width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,.3);
+      text-decoration: none; transition: transform .2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 32px; height: 32px; fill: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      #que-es { grid-template-columns: 1fr; gap: 32px; padding: 60px 5%; }
+      .products-grid { gap: 20px; }
+      .product-card.featured { transform: scale(1); }
+      .step-arrow { display: none; }
+      .steps { flex-direction: column; align-items: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-nav" href="#hero">
+    <img src="Granatina_logo.jpeg" alt="Logo Granatina" onerror="this.style.display='none'"/>
+    Granatina
+  </a>
+  <ul>
+    <li><a href="#que-es">¿Qué es?</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#productos">Presentaciones</a></li>
+    <li><a href="https://wa.me/573126679126" target="_blank" class="nav-cta">¡Pedir ahora!</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Floating background fruits -->
+  <div class="hero-fruits" aria-hidden="true">
+    <span style="top:8%;left:6%;animation-delay:0s">🍍</span>
+    <span style="top:15%;left:85%;animation-delay:1.2s">🥭</span>
+    <span style="top:70%;left:4%;animation-delay:2s">🍌</span>
+    <span style="top:75%;left:90%;animation-delay:.6s">🍈</span>
+    <span style="top:50%;left:92%;animation-delay:1.8s">🍍</span>
+    <span style="top:55%;left:2%;animation-delay:3s">🥭</span>
+    <span style="top:25%;left:50%;animation-delay:.4s">🍌</span>
+    <span style="top:85%;left:45%;animation-delay:2.4s">🍈</span>
+  </div>
+
+  <div class="hero-badge">🌿 100% Natural · Granada, Antioquia</div>
+
+  <h1>Granatina</h1>
+  <p class="tagline">El Placer de Cuidarte</p>
+  <p class="origin">Fruta deshidratada artesanal del corazón de Antioquia</p>
+
+  <div class="hero-btns">
+    <a href="#productos" class="btn-primary">Ver presentaciones</a>
+    <a href="https://wa.me/573126679126" target="_blank" class="btn-wa">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Ordenar por WhatsApp
+    </a>
+  </div>
+
+  <div class="hero-fruits-row" aria-hidden="true">🍌 🥭 🍍 🍈</div>
+</section>
+
+<!-- WAVE -->
+<div class="wave" style="background:radial-gradient(ellipse at 60% 40%,#f97316,var(--orange-dk))">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FFE0B2"/>
+  </svg>
+</div>
+
+<!-- FRUTAS — justo después del hero para captar atención -->
+<section style="background: linear-gradient(160deg, #FFF3E0 0%, #FFE0B2 100%); padding: 60px 5% 20px">
+  <div id="frutas">
+    <p class="section-eyebrow">Lo que encontrarás en cada bolsita</p>
+    <h2 class="section-title">4 Frutas Tropicales,<br/>1 Solo Sabor Natural</h2>
+    <div class="fruits-showcase" style="margin-top:32px; justify-content:center; gap:24px;">
+      <div class="fruit-card-big">
+        <div class="fb-emoji">🥭</div>
+        <h3>Mango</h3>
+        <p>Dulce, fibroso y lleno de vitamina C y betacarotenos.</p>
+      </div>
+      <div class="fruit-card-big">
+        <div class="fb-emoji">🍌</div>
+        <h3>Plátano</h3>
+        <p>Rico en potasio y energía natural. El favorito de los deportistas.</p>
+      </div>
+      <div class="fruit-card-big">
+        <div class="fb-emoji">🍍</div>
+        <h3>Piña</h3>
+        <p>Digestiva, antioxidante y con ese toque ácido tropical irresistible.</p>
+      </div>
+      <div class="fruit-card-big">
+        <div class="fb-emoji">🍈</div>
+        <h3>Papaya</h3>
+        <p>Suave, enzimática y perfecta para cuidar tu digestión cada día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE to cream -->
+<div class="wave" style="background: linear-gradient(160deg, #FFF3E0 0%, #FFE0B2 100%)">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" height="70">
+    <path d="M0,50 C500,0 900,70 1440,30 L1440,70 L0,70 Z" fill="#FFF8EE"/>
+  </svg>
+</div>
+
+<!-- PRODUCTOS — segundo bloque visible -->
+<section id="productos" style="background:var(--cream); padding:60px 5% 70px; text-align:center">
+  <p class="section-eyebrow">Elige tu tamaño</p>
+  <h2 class="section-title" style="color:var(--brown)">Mix de Frutas Granatina</h2>
+  <p style="color:#7a5a44; font-size:1.05rem; max-width:540px; margin:.6em auto 0; line-height:1.7">
+    Para probar, para el día a día o para compartir — tenemos la presentación perfecta para ti.
+  </p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-badge">Degustación</div>
+      <div class="p-emoji">🤏</div>
+      <h3>30 g</h3>
+      <p class="p-sub">Mix de frutas tropicales</p>
+      <p class="p-desc">La porción ideal para conocer Granatina o llevar como snack de emergencia.</p>
+    </div>
+
+    <div class="product-card featured">
+      <div class="product-badge">⭐ Más popular</div>
+      <div class="p-emoji">🛍️</div>
+      <h3>100 g</h3>
+      <p class="p-sub">Mix de frutas tropicales</p>
+      <p class="p-desc">El tamaño perfecto para la semana. Nutritivo, delicioso y fácil de llevar.</p>
+    </div>
+
+    <div class="product-card">
+      <div class="product-badge">Familiar</div>
+      <div class="p-emoji">🎁</div>
+      <h3>250 g</h3>
+      <p class="p-sub">Mix de frutas tropicales</p>
+      <p class="p-desc">Para la familia, la oficina o como regalo. El mejor valor por gramo.</p>
+    </div>
+
+  </div>
+  <p style="color:#7a5a44; margin-top:36px; font-size:.95rem">
+    ¿Quieres una presentación personalizada o un pedido especial para tu empresa o evento?<br/>
+    <a href="https://wa.me/573126679126" target="_blank" style="color:var(--orange); font-weight:800">¡Escríbenos por WhatsApp!</a>
+  </p>
+</section>
+
+<!-- WAVE to cream -->
+<div class="wave" style="background:var(--cream)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FFF8EE"/>
+  </svg>
+</div>
+
+<!-- QUÉ ES -->
+<section style="background:var(--cream); padding:20px 0 0">
+  <div id="que-es">
+    <div>
+      <p class="section-eyebrow">¿Qué es?</p>
+      <h2 class="section-title">Fruta Deshidratada:<br/>Naturaleza Concentrada</h2>
+      <p class="section-body">
+        La fruta deshidratada es fruta fresca a la que se le extrae la mayor parte del agua mediante
+        calor suave y controlado, sin conservantes ni aditivos artificiales. El resultado es un snack
+        intenso en sabor, nutritivo, con larga vida útil y fácil de llevar a cualquier parte. <br/><br/>
+        En <strong>Granatina</strong> seleccionamos las mejores frutas tropicales del Oriente Antioqueño
+        y las deshidratamos de forma artesanal para que cada mordisco te recuerde la frescura del campo.
+      </p>
+    </div>
+    <div class="icon-card-grid">
+      <div class="icon-card">
+        <div class="ic-emoji">💧</div>
+        <h4>Sin agua, con todo</h4>
+        <p>Se elimina el agua, pero se concentran los nutrientes y el sabor.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-emoji">🚫</div>
+        <h4>Sin conservantes</h4>
+        <p>100% natural. Sin colorantes, sin azúcar añadida, sin nada artificial.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-emoji">🎒</div>
+        <h4>Snack ideal</h4>
+        <p>Para el colegio, la oficina, el gym o tus aventuras al aire libre.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-emoji">⏳</div>
+        <h4>Larga vida útil</h4>
+        <p>Duran meses sin refrigeración cuando se almacenan correctamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE to green -->
+<div class="wave" style="background:var(--cream)">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" height="70">
+    <path d="M0,0 C480,70 960,0 1440,50 L1440,70 L0,70 Z" fill="#2D8B4E"/>
+  </svg>
+</div>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <p class="section-eyebrow">Del campo a tu mano</p>
+  <h2 class="section-title">Nuestro Proceso Artesanal</h2>
+  <p class="section-body">Cada bolsita de Granatina recorre un camino lleno de cuidado, respeto por la fruta y amor por lo natural.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-emoji">🧑‍🌾</div>
+      <h4>Selección</h4>
+      <p>Elegimos solo las frutas más maduras y de mejor calidad del Oriente Antioqueño.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-emoji">🫧</div>
+      <h4>Lavado y corte</h4>
+      <p>Lavamos con agua limpia y cortamos en trozos uniformes a mano.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-emoji">🌡️</div>
+      <h4>Deshidratación</h4>
+      <p>Calor suave y constante durante horas para eliminar la humedad sin perder nutrientes.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-emoji">📦</div>
+      <h4>Empaque</h4>
+      <p>Sellado hermético en presentaciones de 30, 100 y 250 gramos.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-emoji">🤝</div>
+      <h4>Entrega</h4>
+      <p>En nuestra tienda en Granada, mercaditos locales y ferias de la región.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE from green to cream -->
+<div class="wave" style="background:#1d6636">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" height="70">
+    <path d="M0,70 C360,0 1080,70 1440,20 L1440,70 L0,70 Z" fill="#FFF8EE"/>
+  </svg>
+</div>
+
+<!-- BENEFICIOS -->
+<section style="background:var(--cream); padding: 0 0 20px">
+  <div id="beneficios">
+    <p class="section-eyebrow">¿Por qué elegir fruta deshidratada?</p>
+    <h2 class="section-title">Beneficios que sientes</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="b-emoji">⚡</div>
+        <h3>Energía natural</h3>
+        <p>Los azúcares naturales de la fruta te dan energía sostenida sin bajones.</p>
+      </div>
+      <div class="benefit-card highlight">
+        <div class="b-emoji">🌿</div>
+        <h3>Rica en fibra</h3>
+        <p>Favorece la digestión y mantiene la saciedad por más tiempo.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-emoji">💪</div>
+        <h3>Vitaminas y minerales</h3>
+        <p>Concentra potasio, vitamina C, hierro y antioxidantes en cada gramo.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-emoji">🏃</div>
+        <h3>Perfecto para deportistas</h3>
+        <p>Liviano, portátil y de rápida absorción. Ideal antes y después del ejercicio.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-emoji">🧒</div>
+        <h3>Para toda la familia</h3>
+        <p>Niños, adultos y adultos mayores lo disfrutan sin preocupaciones.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-emoji">🌍</div>
+        <h3>Apoya lo local</h3>
+        <p>Al comprar Granatina apoyas a productores colombianos y la economía regional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section id="pedir">
+  <h2>¿Listo para probar?<br/>¡Ordena ahora!</h2>
+  <p>Escríbenos por WhatsApp y recibe tu pedido en Granada o coordina entrega. Rápido, fácil y directo del productor a tu mano.</p>
+  <a href="https://wa.me/573126679126" target="_blank" class="btn-wa-big">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Ordenar por WhatsApp
+  </a>
+  <p class="wa-note">📍 También nos encuentras en nuestra tienda en Granada, Antioquia y en ferias locales</p>
+</section>
+
+<!-- NOSOTROS -->
+<section style="background:var(--cream); padding:20px 0">
+  <div id="nosotros">
+    <p class="section-eyebrow">Nuestra historia</p>
+    <h2 class="section-title">Hechos con amor<br/>en Granada, Antioquia</h2>
+    <p class="section-body">
+      Granatina nació del deseo de llevar lo mejor de la tierra colombiana a tu mesa de una forma
+      saludable y deliciosa. Desde Granada, Antioquia, trabajamos de la mano con productores locales
+      para ofrecerte frutas deshidratadas artesanales que respetan el medio ambiente y apoyan la
+      economía de nuestra región.
+    </p>
+    <div class="tag-row">
+      <span class="tag">🌿 100% Natural</span>
+      <span class="tag g">🤝 Hecho en Colombia</span>
+      <span class="tag y">🧡 Artesanal</span>
+      <span class="tag r">🚫 Sin conservantes</span>
+      <span class="tag">🌍 Comercio local</span>
+      <span class="tag g">💚 Sostenible</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="logo-foot">Granatina</span>
+  <em>El Placer de Cuidarte</em><br/>
+  Granada, Antioquia, Colombia 🇨🇴<br/><br/>
+  <a href="https://wa.me/573126679126" target="_blank">💬 WhatsApp: +57 312 667 9126</a><br/><br/>
+  <small>© 2025 Granatina · Fruta deshidratada artesanal · Todos los derechos reservados</small>
+</footer>
+
+<!-- FLOATING WA BUTTON -->
+<a href="https://wa.me/573126679126" target="_blank" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>
